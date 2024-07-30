@@ -1,4 +1,4 @@
-package Exercise3;
+package WEEK_1.Exercise3;
 
 public class Order {
     int orderId;

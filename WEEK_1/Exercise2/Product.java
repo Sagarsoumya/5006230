@@ -1,4 +1,4 @@
-package Exercise2;
+package WEEK_1.Exercise2;
 
 public class Product {
     int ProductId;

@@ -1,4 +1,4 @@
-package Exercise2;
+package WEEK_1.Exercise2;
 
 public class SearchAlgorithms {
     public static Product linerSearch(Product [] products,int targetId){
