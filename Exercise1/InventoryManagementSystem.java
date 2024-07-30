@@ -1,4 +1,6 @@
-package week1;
+package Exercise1;
+
+//package week1;
 import java.util.*;
 public class InventoryManagementSystem {
 	private Map<String,Product> inventory;

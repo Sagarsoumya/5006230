@@ -1,4 +1,6 @@
-package week1;
+package Exercise1;
+
+//package week1;
 
 public class Product {
 	private String productId;
