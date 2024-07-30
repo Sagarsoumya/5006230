@@ -1,4 +1,4 @@
-package WEEK_1.Design_Patterns_And_Principles.Exercise9;
+package WEEK_1.Design_Patterns_And_Principles.Exercise9.CommandPatternExample;
 
 public class RemoteControl {
     private Command command;
