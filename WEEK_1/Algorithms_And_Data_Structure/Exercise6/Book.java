@@ -1,4 +1,4 @@
-package WEEK_1.Exercise6;
+package WEEK_1.Algorithms_And_Data_Structure.Exercise6;
 
 public class Book {
     private int bookId;

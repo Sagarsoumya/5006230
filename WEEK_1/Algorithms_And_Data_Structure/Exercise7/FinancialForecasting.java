@@ -1,4 +1,4 @@
-package WEEK_1.Exercise7;
+package WEEK_1.Algorithms_And_Data_Structure.Exercise7;
 
 public class FinancialForecasting {
     public static double calculateFutureValue(double presentValue, double growthRate, int years) {

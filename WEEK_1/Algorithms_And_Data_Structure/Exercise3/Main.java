@@ -1,4 +1,4 @@
-package WEEK_1.Exercise3;
+package WEEK_1.Algorithms_And_Data_Structure.Exercise3;
 
 public class Main {
     public static void main(String[] args) {

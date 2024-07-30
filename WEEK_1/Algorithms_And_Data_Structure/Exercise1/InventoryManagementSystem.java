@@ -1,4 +1,4 @@
-package WEEK_1.Exercise1;
+package WEEK_1.Algorithms_And_Data_Structure.Exercise1;
 
 //package week1;
 import java.util.*;

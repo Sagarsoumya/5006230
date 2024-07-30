@@ -1,4 +1,4 @@
-package WEEK_1.Exercise5;
+package WEEK_1.Algorithms_And_Data_Structure.Exercise5;
 
 public class Task {
     private int taskId;

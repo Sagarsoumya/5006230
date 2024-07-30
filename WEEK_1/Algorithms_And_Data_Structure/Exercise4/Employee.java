@@ -1,4 +1,4 @@
-package WEEK_1.Exercise4;
+package WEEK_1.Algorithms_And_Data_Structure.Exercise4;
 
 public class Employee {
     private int employeeId;
