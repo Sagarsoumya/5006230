@@ -10,7 +10,7 @@ import java.util.Objects;
         query = "SELECT e FROM Employee e WHERE e.name = :name"
 
 )
-public class Employee {
+public class Employee extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
