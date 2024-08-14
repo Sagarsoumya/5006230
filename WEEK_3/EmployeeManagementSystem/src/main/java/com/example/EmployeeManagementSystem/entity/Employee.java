@@ -1,7 +1,12 @@
 package com.example.EmployeeManagementSystem.entity;
 
 import jakarta.persistence.*;
+@Entity
+@NamedQuery(
+        name = "Employee.findByName",
+        query = "SELECT e FROM Employee e WHERE e.name = :name"
 
+)
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
