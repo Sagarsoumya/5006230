@@ -2,64 +2,55 @@ package com.example.EmployeeManagementSystem.controller;
 
 import com.example.EmployeeManagementSystem.entity.Employee;
 import com.example.EmployeeManagementSystem.repository.EmployeeRepository;
-import com.example.EmployeeManagementSystem.service.EmployeeService;
-import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Optional;
 
-@RestController
-@RequestMapping("/employees")
+@Service
 public class EmployeeController {
+
     @Autowired
     private EmployeeRepository employeeRepository;
-    @Autowired
-    private EmployeeService employeeService;
 
-    @GetMapping
-    public List<Employee> getAllEmployees() {
-        return employeeRepository.findAll();
-    }
-    @GetMapping("/name")
-    public Page<Employee> getEmployeesByName(
-            @RequestParam String name,
-            @RequestParam int page,
-            @RequestParam int size,
-            @RequestParam String sortField,
-            @RequestParam String sortDirection) {
-        return employeeService.getEmployeesByName(name, page, size, sortField, sortDirection);
-    }
-    @GetMapping("/department")
-    public Page<Employee> getEmployeesByDepartmentName(
-            @RequestParam String deptName,
-            @RequestParam int page,
-            @RequestParam int size,
-            @RequestParam String sortField,
-            @RequestParam String sortDirection) {
-        return employeeService.getEmployeesByDepartmentName(deptName, page, size, sortField, sortDirection);
-    }
-    @GetMapping("/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable long id) {
-        return employeeService.getEmployeeById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-    @PostMapping
-    public Employee createEmployee(@RequestBody Employee employee) {
-        return employeeService.createEmployee(employee);
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable long id, @RequestBody Employee employee) {
-        return ResponseEntity.ok(employeeService.updateEmployee(id, employee));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmployee(@PathVariable long id) {
-        employeeService.deleteEmployee(id);
-        return ResponseEntity.noContent().build();
+    public Page<Employee> getAllEmployees(Pageable pageable) {
+        return employeeRepository.findAll(pageable);
     }
 
+    public Page<Employee> getEmployeesByName(String name, Pageable pageable) {
+        return employeeRepository.findByName(name, pageable);
+    }
+
+    public Page<Employee> getEmployeesByDepartmentName(String deptName, Pageable pageable) {
+        return employeeRepository.findByDepartmentName(deptName, pageable);
+    }
+
+    public Optional<Employee> getEmployeeById(long id) {
+        return employeeRepository.findById(id);
+    }
+
+    public Employee createEmployee(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+
+    public Employee updateEmployee(long id, Employee employee) {
+        if (employeeRepository.existsById(id)) {
+            employee.setId(id);
+            return employeeRepository.save(employee);
+        }
+        return null; // or throw an exception if preferred
+    }
+
+    public void deleteEmployee(long id) {
+        employeeRepository.deleteById(id);
+    }
+
+    public Pageable createPageable(int page, int size, String sortField, String sortDirection) {
+        Sort sort = Sort.by(Sort.Direction.fromString(sortDirection), sortField);
+        return PageRequest.of(page, size, sort);
+    }
 }
