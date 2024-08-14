@@ -1,6 +1,9 @@
 package com.example.EmployeeManagementSystem.entity;
 
 import jakarta.persistence.*;
+
+import java.util.Objects;
+
 @Entity
 @NamedQuery(
         name = "Employee.findByName",
@@ -57,5 +60,25 @@ public class Employee {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+    @Override
+    public String toString() {
+        return "Employee{id=" + id + ", name='" + name + '\'' + ", email='" + email + '\'' + ", department=" + department + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(id, employee.id) &&
+                Objects.equals(name, employee.name) &&
+                Objects.equals(email, employee.email) &&
+                Objects.equals(department, employee.department);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, email, department);
     }
 }

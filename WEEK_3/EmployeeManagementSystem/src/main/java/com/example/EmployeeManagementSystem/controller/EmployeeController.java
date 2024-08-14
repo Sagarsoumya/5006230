@@ -3,6 +3,7 @@ package com.example.EmployeeManagementSystem.controller;
 import com.example.EmployeeManagementSystem.entity.Employee;
 import com.example.EmployeeManagementSystem.repository.EmployeeRepository;
 import com.example.EmployeeManagementSystem.service.EmployeeService;
+import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -22,6 +23,24 @@ public class EmployeeController {
     @GetMapping
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
+    }
+    @GetMapping("/name")
+    public Page<Employee> getEmployeesByName(
+            @RequestParam String name,
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam String sortField,
+            @RequestParam String sortDirection) {
+        return employeeService.getEmployeesByName(name, page, size, sortField, sortDirection);
+    }
+    @GetMapping("/department")
+    public Page<Employee> getEmployeesByDepartmentName(
+            @RequestParam String deptName,
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam String sortField,
+            @RequestParam String sortDirection) {
+        return employeeService.getEmployeesByDepartmentName(deptName, page, size, sortField, sortDirection);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable long id) {
